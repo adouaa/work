@@ -1,0 +1,76 @@
+@import './styles/core';
+
+
+
+/* ---------- Navigation Blocks  ----------- */
+
+.app-navblocks--content {
+    .active {
+        i {
+            color: #fff !important;
+            opacity: .4;
+        }
+    }
+
+    .tree-diagram__wrapper {
+        i {
+            color: inherit !important;
+            opacity: 1;
+        }
+    }
+}
+
+
+
+
+
+/* ---------- Custom  ----------- */
+.app-main-selectwrapper {
+    /* Horizontally aligned form text is centered */
+    .app-text {
+        padding-top: .4em;  
+    }
+}
+
+.app-list-border {
+    border: 2px dashed var(--app-card-border-color);
+    background-color: var(--app-card-header-footer-bg);
+    border-radius: 0.35rem;
+}
+
+	
+
+
+
+/* ---------- Tree  ----------- */
+.app-tree-mainlist-autoheight--child-child__wrapper {
+    max-height: calc(100% - 3.875rem);
+}
+
+
+
+/* ---------- Dark Mode ----------- */
+
+.dark-mode,
+[data-bs-theme=dark] {
+
+    .app-tree-mainlist-autoheight {
+        --app-tree-mainlist-autoheight-white-01: rgba(255, 255, 255, 0.1);
+        --app-tree-mainlist-autoheight-text-color: rgba(255, 255, 255, 0.9);
+
+        .text-dark {
+            color: var(--app-tree-mainlist-autoheight-text-color) !important;
+        }
+
+        .list-group-item.active {
+            &.bg-primary-subtle {
+                background-color: var(--app-tree-mainlist-autoheight-white-01) !important;
+            }
+        }
+
+    }
+}
+
+
+
+
