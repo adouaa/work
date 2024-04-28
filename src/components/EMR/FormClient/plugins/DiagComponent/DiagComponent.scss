@@ -1,0 +1,167 @@
+.diag_main {
+
+    .diag_list {
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            background-color: #eee;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #dadada;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #929292;
+            }
+        }
+
+        &::-webkit-scrollbar-corner {
+            background-color: transparent;
+        }
+
+        .diag_child {
+            padding-left: 30px;
+        }
+
+        .diag_edit {
+            opacity: 0;
+            transition: all ease 0.2s;
+
+            .diag_edit-icon {
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+
+
+        }
+    }
+}
+
+.diag_check-detail-close {
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+
+.diag_sure-detail-close {
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+
+
+.diag_modal-item {
+    cursor: pointer;
+
+    .diag_current-child {
+        opacity: 0;
+        transition: all ease 0.2s;
+    }
+}
+
+.diag_list-overflow {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        background-color: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #dadada;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #929292;
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+.diag_mainList-search-box {
+    height: calc(90vh - 43rem);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        background-color: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #dadada;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #929292;
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+.diag_subList-search-box {
+    height: calc(90vh - 38rem);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        background-color: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #dadada;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #929292;
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+.dark-mode {
+    .diag_list {
+        &::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+            background-color: #444;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #727272;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #636363;
+            }
+        }
+
+        &::-webkit-scrollbar-corner {
+            background-color: transparent;
+        }
+
+
+    }
+}

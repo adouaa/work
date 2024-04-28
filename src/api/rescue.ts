@@ -27,7 +27,6 @@ export const getSelectRescueUserListAPI = (rescue_id: number) => fetchPost("resc
     rescue_id
 })
 
-export const getRescueUserListAPI = () => fetchPost("rescue/GetRescueUserList")
 
 export const saveRescueUserAPI = (rescue_id: number, delete_row: any, row_list?: any) => fetchPost("rescue/SaveRescueUserList", {
     rescue_id,

@@ -1,0 +1,18 @@
+.report_table-responsive {
+    height: 250px;
+    overflow: auto;
+    font-size: 0.75rem;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 5px;
+
+    }
+
+}

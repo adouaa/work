@@ -1,0 +1,98 @@
+
+/* ---------- Tree  ----------- */
+.app-dataisland-container-autoheight {
+    max-height: calc(100vh - 4.875rem);
+    font-size: 0.75rem;
+    overflow-y: auto;
+
+    &.app-dataisland-container-autoheight--side {
+        height: calc(100vh - 4.875rem);
+    }
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    &::-webkit-scrollbar-track {
+        background:  rgba(0, 0, 0, 0);
+    }
+
+
+    h6 {
+        font-size: 0.875rem;
+    }
+}
+
+
+/* ---------- Layputs  ----------- */
+.app-dataisland-chart {
+
+}
+
+.app-dataisland-container-autoheight {
+    height: calc(100vh - 5rem - 220px);
+    font-size: 0.75rem;
+    overflow-y: auto;
+
+    &.app-dataisland-container-autoheight--full {
+        height: calc(100vh - 5rem);
+    }
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    &::-webkit-scrollbar-track {
+        background:  rgba(0, 0, 0, 0);
+    }
+
+
+    h6 {
+        font-size: 0.875rem;
+    }
+}
+
+
+
+/* ---------- Table  ----------- */
+.app-builder-reference-data__list {
+    font-size: 0.75rem;
+}
+
+.app-builder-reference-data__radio-checkbox {
+    padding-top: .4em;  
+}
+
+
+
+/* ---------- Dark Mode ----------- */
+.dark-mode,
+[data-bs-theme=dark] {
+
+    
+    .app-builder-tree-mainlist-autoheight {
+        h6 {
+            color: #eee;
+        }
+    }
+
+    .app-dataisland-container-autoheight {
+        h6 {
+            color: #ddd;
+        }
+    }
+    
+}
+
+
+
+
+

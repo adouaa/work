@@ -1,6 +1,6 @@
 import { withTranslation } from "react-i18next";
 import classNames from "classnames";
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import "./index.css";
 
 import { useEffect, useRef, useState } from "react";
@@ -18,10 +18,10 @@ export interface SelectProps {
 
 interface MultipleSelectProps extends SelectProps {
     onMultipleSelectChangeOK?: (selectedOptions: any[]) => void;
-
+    ref?: any;
 }
 
-const MultipleSelect: React.FC<MultipleSelectProps> = (props: MultipleSelectProps) => {
+const MultipleSelect: React.FC<MultipleSelectProps> = forwardRef((props: MultipleSelectProps, ref) => {
 
 
 
@@ -119,8 +119,6 @@ const MultipleSelect: React.FC<MultipleSelectProps> = (props: MultipleSelectProp
 
     useEffect(() => {
         window.addEventListener("click", (e: any) => {
-            console.log(disabled);
-            
             // 用类名方便
             let classNames = ["multiple-input", "option-item", "option-item false", "option-item multiple-select-active", "select-list", "selected-option", "multiple-select-wrapper form-control ", "multiple-select-wrapper form-control focus"];
             // let classNames = ["multiple-input", "select-list", "selected-option", "multiple-select-wrapper form-control ", "multiple-select-wrapper form-control focus"];
@@ -152,14 +150,11 @@ const MultipleSelect: React.FC<MultipleSelectProps> = (props: MultipleSelectProp
     }, [])
 
     const newFilterOptions = (arr: any, item: any) => {
-        console.log("item = ", item);
-        
         arr.forEach((i: any) => {
             if (i.user_id === item.user_id) {
                 i.selected = true;
             }
         })
-        console.log(arr);
         setFilterdOptions(arr);
     }
 
@@ -213,6 +208,16 @@ const MultipleSelect: React.FC<MultipleSelectProps> = (props: MultipleSelectProp
         
     }, [disabled])
 
+    const clear = () => {
+        multipleInputRef.current.value = "";
+        setSelectedOptions([]);
+        setFilterdOptions([]);
+    }
+
+    useImperativeHandle(ref, () => ({
+        clear
+    }));
+
     return <>
         <div ref={multipleSelectWrapperFormControlRef} tabIndex={0} onBlur={handleBlur}  className={`multiple-select-wrapper form-control ${isHighlighted ? "focus" : ""}`}>
             <div ref={selectListRef} className="select-list">
@@ -229,7 +234,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = (props: MultipleSelectProp
             </div>
         </div>
         {!disabled && showOptions &&
-            <div className="option-wrapper multiple-select-option-wrapper">
+            <div style={{position: "relative"}} className="option-wrapper multiple-select-option-wrapper">
                 {filterdOptions?.map((option: any, index: number) => {
                     // --巧妙
                     return <div ref={optionItemRefs[index]} key={index} onClick={() => handleSelect(option)} className={`option-item ${option.selected && "multiple-select-active"}`}>
@@ -239,6 +244,6 @@ const MultipleSelect: React.FC<MultipleSelectProps> = (props: MultipleSelectProp
             </div>}
     </>
 
-}
+})
 
-export default withTranslation()(MultipleSelect);
+export default MultipleSelect;

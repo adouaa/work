@@ -1,9 +1,9 @@
 {
-    "name": "sql-management",
-    "symbol": "SQL外部数据源管理",
+    "name": "rescue-manage",
+    "symbol": "抢救管理",
     "version": "1.0.0",
     "keywords": [
-        "SQL外部数据源管理"
+        "rescue-manage"
     ],
     "private": true,
     "homepage": "http://.",
@@ -37,7 +37,7 @@
         }
     },
     "dependencies": {
-        "adou-ui": "^0.0.73",
+        "adou-ui": "^0.0.88",
         "axios": "^0.27.2",
         "bootstrap": "^5.2.3",
         "classnames": "^2.5.1",

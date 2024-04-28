@@ -59,6 +59,7 @@ const Rescue = () => {
 
     const routerJump = (id: number) => {
         useNavigate(`/${system_name}/${id || "-1"}?link_name=${linkNameRef.current}&link_value=${linkValueRef.current}&visit_id=${visitIdRef.current}`)
+        getUrlProperty();
     }
 
     const getRescueList = async () => {
@@ -87,9 +88,9 @@ const Rescue = () => {
             } else if (dayjsTime1.isSame(dayjsTime2, 'year')) {
                 name = `${dayjsTime1.format("YYYY-MM-DD HH:mm")}~${dayjsTime2.month() < 10 ? "0" + dayjsTime2.month() : dayjsTime2.month()}-${dayjsTime2.date() < 10 ? "0" + dayjsTime2.date() : dayjsTime2.date()} ${dayjsTime2.hour() < 10 ? "0" + dayjsTime2.hour() : dayjsTime2.hour()}:${dayjsTime2.minute() < 10 ? "0" + dayjsTime2.minute() + "分" : dayjsTime2.minute() + "分"}`
             } else if (!item.end_time) {
-                name = `${dayjsTime1.format("YYYY-MM-DD HH:mm")}-未知`
+                name = `${dayjsTime1.format("YYYY-MM-DD HH:mm")}-抢救中`
             } else {
-                name = `${item.start_time}-${item.end_time || "未知"}`
+                name = `${item.start_time}-${item.end_time || "抢救中"}`
             }
             // name = `${item.start_time}-${item.end_time || "未知"}-[${result}]`
             return { ...item, name, id: item.rescue_id };
@@ -101,7 +102,17 @@ const Rescue = () => {
             routerJump(data[0]?.rescue_id);
         }
 
-
+        data.forEach((item: any) => {
+            if (item.rescue_result === "SUCCESS") {
+                item.showTag = "success-tag";
+            } else if (item.rescue_result === "FAIL") {
+                item.showTag = "fail-tag";
+            } else if (item.rescue_result === "RESCUE") {
+                item.showTag = "rescue-tag";
+            } else if (item.rescue_result === "ABORT") {
+                item.showTag = "abort-tag";
+            }
+        })
         setRescueList(data);
 
     }
@@ -144,6 +155,8 @@ const Rescue = () => {
         }
     }
 
+    const multipleRef = useRef<any>(null);
+
     const handleAddRescue = () => {
         routerJump(-1);
         formRef.current.resetForm();
@@ -153,6 +166,9 @@ const Rescue = () => {
         setRescueProperty({})
         setSelectUserList([]);
         setResult("");
+        multipleRef.current && multipleRef.current.clear && multipleRef.current.clear();
+        
+
     }
 
     const handleSaveRescue = async () => {
@@ -163,16 +179,20 @@ const Rescue = () => {
                     formData.start_time = startTime;
                     formData.end_time = endTime;
                     formData.dead_time = deatTime;
-                    console.log(formData);
 
+                    let showTag = "";
                     if (formData.rescue_result?.value === "成功") {
                         result = "SUCCESS";
+                        showTag = "success-tag"
                     } else if (formData.rescue_result?.value === "失败") {
                         result = "FAIL";
+                        showTag = "fail-tag"
                     } else if (formData.rescue_result?.value === "抢救中") {
                         result = "RESCUE";
+                        showTag = "rescue-tag"
                     } else if (formData.rescue_result?.value === "放弃") {
                         result = "ABORT";
+                        showTag = "abort-tag"
                     }
                     const data = { ...formData, rescue_result: result, rescue_go: formData.rescue_go?.value }
                     try {
@@ -195,9 +215,9 @@ const Rescue = () => {
                         } else if (dayjsTime1.isSame(dayjsTime2, 'year')) {
                             name = `${dayjsTime1.format("YYYY-MM-DD HH:mm")}~${dayjsTime2.month() < 10 ? "0" + dayjsTime2.month() : dayjsTime2.month()}-${dayjsTime2.date() < 10 ? "0" + dayjsTime2.date() : dayjsTime2.date()} ${dayjsTime2.hour() < 10 ? "0" + dayjsTime2.hour() : dayjsTime2.hour()}:${dayjsTime2.minute() < 10 ? "0" + dayjsTime2.minute() + "分" : dayjsTime2.minute() + "分"}`
                         } else if (!data.end_time) {
-                            name = `${dayjsTime1.format("YYYY-MM-DD HH:mm")}-未知`
+                            name = `${dayjsTime1.format("YYYY-MM-DD HH:mm")}-抢救中`
                         } else {
-                            name = `${data.start_time}-${data.end_time || "未知"}`
+                            name = `${data.start_time}-${data.end_time || "抢救中"}`
                         }
                         if (Number(rescue_id) === -1 && res.rescue_id > 0) {
                             routerJump(res.rescue_id);
@@ -213,7 +233,8 @@ const Rescue = () => {
                                 result = "放弃";
                             }
                             setRescueList([...rescueList, {
-                                ...data, rescue_id: res.rescue_id, name, id: res.rescue_id
+                                ...data, rescue_id: res.rescue_id, name, id: res.rescue_id,
+                                showTag
                             }])
                         }
                         console.log(data);
@@ -221,12 +242,11 @@ const Rescue = () => {
                         // 控制结束时间变化，因为不去重新获取列表
                         setRescueList((arr: any) => {
                             return arr.map((item: any) => {
-                                console.log(item.rescue_id);
-                                console.log(Number(rescue_id));
 
                                 if (item.rescue_id === Number(rescue_id)) {
                                     item.end_time = data.end_time;
                                     item.name = name;
+                                    item.showTag = showTag;
                                 }
                                 return item;
                             })
@@ -284,6 +304,8 @@ const Rescue = () => {
     }, [])
 
     useEffect(() => {
+        console.log("visitIdRef.current", visitIdRef.current);
+        
         visitIdRef.current > 0 && getRescueList();
     }, [visitIdRef.current])
 
@@ -434,9 +456,24 @@ const Rescue = () => {
         setDefaultCustomDate(defaultVal);
     }, []);
 
+    useEffect(() => {
+        window.addEventListener('hashchange', () => {
+            getRescueList();
+            getSelectUserList();
+        })
+    }, []);
+
+    
+
+    const handleTest = () => {
+        window.location.hash = `/${system_name}/${rescue_id || "-1"}?link_name=${linkNameRef.current}&link_value=${linkValueRef.current}&visit_id=${20231030037}`;
+        getUrlProperty();
+    }
+
 
     return (
         <div className="rescue-wrapper">
+        <button onClick={handleTest}>测试</button>
             <div className="rescue-list p-2">
                 <div className="header mb-2">
                     <Button onClickOK={handleAddRescue} size="sm" outlineColor="success">
@@ -447,7 +484,12 @@ const Rescue = () => {
                     </Button>
                 </div>
                 <div className="content">
-                    <List maxHeight={300} showOptIcons={false} onItemClick={(node) => handleRescueItemClick(node)} activeId={activeId} maxWidth={300} data={rescueList}></List>
+                    <List showTag={true} maxHeight={360} showOptIcons={false} onItemClick={(node) => handleRescueItemClick(node)} activeId={activeId} maxWidth={300} data={rescueList}>
+                        <div id='success-tag' className='success-tag'>成功</div>
+                        <div id='fail-tag' className='fail-tag'>失败</div>
+                        <div id='abort-tag' className='abort-tag'>放弃</div>
+                        <div id='rescue-tag' className='rescue-tag'>抢救中</div>
+                    </List>
                 </div>
             </div>
             <div className="property p-2">
@@ -570,7 +612,7 @@ const Rescue = () => {
                     <Modal width="600px" title="提示" content={<div>确定移除该抢救人员(姓名：{deletUserInfo.user_name})？</div>} type="tip" show={showDeleteSelectUserModal} onConfirm={handleConfirmDeleteSelectUser} onCancel={handleCloseDeleteSelectUserModal} onClose={handleCloseDeleteSelectUserModal}></Modal>
                 </div>
                 <div className="footer-user-list text-end">
-                    <AdouMultipleSelect disabled={Number(resuceId) <= 0} onMultipleSelectChangeOK={(value: any) => handleUserSelect(value)} showSelected={false} onChangeOK={(value) => handleRetrieveInputChange(value)} options={userList}></AdouMultipleSelect>
+                    <AdouMultipleSelect ref={multipleRef} disabled={Number(resuceId) <= 0} onMultipleSelectChangeOK={(value: any) => handleUserSelect(value)} showSelected={false} onChangeOK={(value: any) => handleRetrieveInputChange(value)} options={userList}></AdouMultipleSelect>
                 </div>
             </div>
         </div>

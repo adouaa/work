@@ -1,0 +1,125 @@
+.diag_main .diag_list {
+  overflow-y: auto;
+}
+.diag_main .diag_list::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #eee;
+}
+.diag_main .diag_list::-webkit-scrollbar-thumb {
+  background-color: #dadada;
+  border-radius: 5px;
+}
+.diag_main .diag_list::-webkit-scrollbar-thumb:hover {
+  background-color: #929292;
+}
+.diag_main .diag_list::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.diag_main .diag_list .diag_child {
+  padding-left: 30px;
+}
+.diag_main .diag_list .diag_edit {
+  opacity: 0;
+  transition: all ease 0.2s;
+}
+.diag_main .diag_list .diag_edit .diag_edit-icon {
+  cursor: pointer;
+}
+.diag_main .diag_list .diag_edit .diag_edit-icon:hover {
+  transform: scale(1.2);
+}
+
+.diag_check-detail {
+  position: fixed;
+  opacity: 0;
+  z-index: 10;
+  transform: translateX(-50%);
+  transition: opacity ease 0.2s;
+}
+.diag_check-detail .diag_check-detail-close:hover {
+  transform: scale(1.1);
+}
+
+.diag_modal-item {
+  cursor: pointer;
+}
+.diag_modal-item .diag_current-child {
+  opacity: 0;
+  transition: all ease 0.2s;
+}
+
+.diag_list-overflow {
+  overflow-y: auto;
+}
+.diag_list-overflow::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #eee;
+}
+.diag_list-overflow::-webkit-scrollbar-thumb {
+  background-color: #dadada;
+  border-radius: 5px;
+}
+.diag_list-overflow::-webkit-scrollbar-thumb:hover {
+  background-color: #929292;
+}
+.diag_list-overflow::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.diag_mainList-search-box {
+  height: calc(90vh - 43rem);
+  overflow-y: auto;
+}
+.diag_mainList-search-box::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #eee;
+}
+.diag_mainList-search-box::-webkit-scrollbar-thumb {
+  background-color: #dadada;
+  border-radius: 5px;
+}
+.diag_mainList-search-box::-webkit-scrollbar-thumb:hover {
+  background-color: #929292;
+}
+.diag_mainList-search-box::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.diag_subList-search-box {
+  height: calc(90vh - 38rem);
+  overflow-y: auto;
+}
+.diag_subList-search-box::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #eee;
+}
+.diag_subList-search-box::-webkit-scrollbar-thumb {
+  background-color: #dadada;
+  border-radius: 5px;
+}
+.diag_subList-search-box::-webkit-scrollbar-thumb:hover {
+  background-color: #929292;
+}
+.diag_subList-search-box::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.dark-mode .diag_list::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #444;
+}
+.dark-mode .diag_list::-webkit-scrollbar-thumb {
+  background-color: #727272;
+  border-radius: 5px;
+}
+.dark-mode .diag_list::-webkit-scrollbar-thumb:hover {
+  background-color: #636363;
+}
+.dark-mode .diag_list::-webkit-scrollbar-corner {
+  background-color: transparent;
+}/*# sourceMappingURL=DiagComponent.css.map */

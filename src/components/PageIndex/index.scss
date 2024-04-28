@@ -1,0 +1,112 @@
+.page-index {
+    display: flex;
+    flex-direction: column;
+
+    .rescue-wrapper {
+        box-sizing: border-box;
+        display: flex;
+        padding: 20px;
+        border-bottom: 1px solid #d8d6d6;
+        margin-bottom: 20px;
+        height: 440px;
+        .header {
+            .delete-btn {
+                flex: 1;
+            }
+        }
+        .rescue-list {
+            width: 304px;
+            max-height: 400px;
+            border-right: 1px solid #d8d6d6;
+        }
+        .property {
+            width: 450px;
+            // border-right: 1px solid #d8d6d6;
+        }
+        .user-list {
+            flex: 1;
+            .header {
+                justify-content: space-between;
+                .opt-btns {
+                    display: flex;
+                }
+            }
+            .content {
+                display: flex;
+                min-height: 200px;
+                padding-bottom: 20px;
+                .select-user-list {
+                    width: 300px;
+                }
+                .right-form {
+                    flex: 1;
+                }
+                border-bottom: 1px solid #d8d6d6;
+                margin-bottom: 20px;
+            }
+            .footer-user-list {
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    .success-tag {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        background-color: #f0f9eb;
+        color: #6dc442;
+        white-space: nowrap;
+    }
+    .fail-tag {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        background-color: #fef0f0;
+        color: #f67878;
+        white-space: nowrap;
+    }
+    .abort-tag {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        background-color: #fef0f0;
+        color: #f67878;
+        white-space: nowrap;
+    }
+    .rescue-tag {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        background-color: #f4f4f5;
+        color: #999ca1;
+        white-space: nowrap;
+    }
+
+    .emr-wrapper {
+        max-height: calc(100vh - 460px);
+        overflow: auto;
+        flex: 1;
+    }
+    
+     /* 修改滚动条的样式 */
+     ::-webkit-scrollbar {
+        width: 8px !important; /* 设置滚动条宽度 */
+    }
+    
+    /* 修改滚动条轨道的样式 */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1 !important; /* 设置滚动条轨道背景色 */
+    }
+    
+    /* 修改滚动条滑块的样式 */
+    ::-webkit-scrollbar-thumb {
+        background: #888 !important; /* 设置滚动条滑块颜色 */
+    }
+    
+    /* 鼠标悬停在滚动条上时的样式 */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555 !important; /* 设置滚动条滑块在鼠标悬停时的颜色 */
+    }
+}
+/* 修改滚动条的样式 */
