@@ -2,7 +2,7 @@
  *  Generate session id
  * 
  * Usage: 
- * npm run gen-session  --username=13 --password=888
+ * npm run gen-session  --username=test --password=test
  */
 const path = require('path');
 

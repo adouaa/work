@@ -25,13 +25,14 @@ import InputDate from 'funda-ui/Date'
 import Button from "adou-ui/Button";
 import "./index.scss";
 import getUrlProperty1 from "../../utils/get-property";
-const {name} = require("../../../package.json");
+import Loading from "../loading";
+const { name } = require("../../../package.json");
 
 
 const PageIndex = () => {
 
 
-    
+
 
     // Rescue逻辑
     // const useNavigate = useNavigateTo();
@@ -146,7 +147,7 @@ const PageIndex = () => {
     }
 
     const handleRescueItemClick = (node: any) => {
-        formRef.current.resetForm();
+        // formRef.current.resetForm(); // 不能随便清空，不然有些值后续赋值不上。。--那种简单值
         // routerJump(node.rescue_id);
         rescueIdRef.current = node.rescue_id;
         if (Number(rescueIdRef.current) > 0) {
@@ -185,7 +186,6 @@ const PageIndex = () => {
             const property = { ...rescue_property, rescue_result: result };
             // formRef.current.resetForm();
             // setRescueProperty({});
-
             setTimeout(() => {
                 setRescueProperty(property); // 有时候会出现异步问题，加个定时器即可
                 setResult(property.rescue_result);
@@ -376,21 +376,21 @@ const PageIndex = () => {
                 const { visit_id } = getUrlProperty1();
                 visitIdRef.current = Number(visit_id);
                 if (visitIdRef.current > 0) {
-                // 这两个要有 --
-                Number(rescueIdRef.current) > 0 && getRescueList();
-                Number(rescueIdRef.current) > 0 && getSelectUserList();
+                    // 这两个要有 --
+                    Number(rescueIdRef.current) > 0 && getRescueList();
+                    Number(rescueIdRef.current) > 0 && getSelectUserList();
                 }
                 initUrlGetData();
                 setIsHashChange(true);
-                 // 要把当前删除的抢救记录的信息删除--出现问题哈哈，不去获取rescueProperty
-                 /* setStartTime("");
-                 setEndTime("");
-                 setDeadTime("");
-                 setSelectUserList([]);
-                 setRescueProperty({});
-                 getRescueList(); */
+                // 要把当前删除的抢救记录的信息删除--出现问题哈哈，不去获取rescueProperty
+                /* setStartTime("");
+                setEndTime("");
+                setDeadTime("");
+                setSelectUserList([]);
+                setRescueProperty({});
+                getRescueList(); */
             }
-           
+
         })
     }, []);
 
@@ -1470,7 +1470,7 @@ const PageIndex = () => {
                     className={`formClient-box px-2 ${isShowPdf ? 'd-none' : ''}`}
                 >
                     {
-                        !isInitLoading && formId ? <>
+                        !isInitLoading ? formId ? <>
                             <div className='d-inline-flex align-items-center'>
                                 <span className='text-primary text-nowrap'>时间：</span>
                                 <InputDate
@@ -1648,9 +1648,9 @@ const PageIndex = () => {
                                                 setValue={setCurrentTime}
                                             /> */}
 
-                        </> : null
+                        </> : null : <Loading></Loading>
                     }
-                    <div className="btns d-flex m2-2">
+                    {!isInitLoading && <div className="btns d-flex mt-2">
                         <div className="save-btn me-1">
                             <Button type="primary" onClickOK={saveBtnClick}>
                                 <div>保存</div>
@@ -1661,7 +1661,7 @@ const PageIndex = () => {
                                 <div>提交</div>
                             </Button>
                         </div>}
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

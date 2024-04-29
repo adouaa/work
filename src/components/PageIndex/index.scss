@@ -5,7 +5,6 @@
     .rescue-wrapper {
         box-sizing: border-box;
         display: flex;
-        padding: 20px;
         border-bottom: 1px solid #d8d6d6;
         margin-bottom: 20px;
         height: 440px;
@@ -33,7 +32,7 @@
             }
             .content {
                 display: flex;
-                min-height: 200px;
+                min-height: 180px;
                 padding-bottom: 20px;
                 .select-user-list {
                     width: 300px;
@@ -110,3 +109,7 @@
     }
 }
 /* 修改滚动条的样式 */
+
+.form-client {
+    position: relative;
+}
